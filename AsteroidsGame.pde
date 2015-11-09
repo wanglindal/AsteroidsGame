@@ -1,13 +1,66 @@
-SpaceShip ship;//your variable declarations here
+SpaceShip ship;
+Stars [] star;//your variable declarations here
 public void setup() 
 {
   size(600,600);
-  background(0);
    ship= new SpaceShip();
+   star= new Stars[400];
+   for(int i=0; i<star.length;i++)
+   {
+    star[i] =new Stars(); 
+  }
 }
 public void draw() 
 {
+  background(0);
   ship.show();
+  ship.move(); 
+  for(int i=0; i<star.length;i++)
+   {
+    star[i].show();
+  } 
+}
+public void keyPressed()
+{
+  if (keyCode == UP)
+    {
+      ship.accelerate(0.2);
+    }
+    else if(keyCode == DOWN)
+    {
+      ship.accelerate(-0.2);
+    }
+    else if(keyCode==RIGHT)
+    {
+      ship.rotate(20);
+    }
+    else if (keyCode == LEFT)
+    {
+      ship.rotate(-20);
+    }
+    if (key == 's')
+    {
+      ship.setX((int)(Math.random()*600));
+      ship.setY((int)(Math.random()*600));
+      ship.setDirectionX(0);
+      ship.setDirectionY(0);
+      ship.setPointDirection((int)(Math.random()*360));
+    }
+}
+class Stars
+{
+  private int x,y;
+  public Stars()
+  {
+    x=(int)(Math.random()*600);
+    y=(int)(Math.random()*600);
+  }
+  public void show()
+  {
+    fill(255);
+    ellipse(x,y,1,1);
+  }
+
 }
 class SpaceShip extends Floater  
 {   
@@ -27,7 +80,7 @@ class SpaceShip extends Floater
     myCenterY=300;
     myDirectionX=5;
     myDirectionY=5;
-    myPointDirection=0;
+    myPointDirection=270;
   }
    public void setX(int x) {myCenterX = x;}  
    public int getX(){return (int)myCenterX;}   
