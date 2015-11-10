@@ -38,7 +38,7 @@ public void keyPressed()
     {
       ship.rotate(-20);
     }
-    if (key == 's')
+    if (key == ' ')
     {
       ship.setX((int)(Math.random()*600));
       ship.setY((int)(Math.random()*600));
@@ -75,7 +75,7 @@ class SpaceShip extends Floater
     yCorners[1]=0;
     xCorners[2]= -8;
     yCorners[2]=8;
-    myColor=255;
+    myColor=223;
     myCenterX=300;
     myCenterY=300;
     myDirectionX=5;
@@ -153,7 +153,7 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
   }   
   public void show ()  //Draws the floater at the current position  
   {             
-    fill(myColor);   
+    fill(77,myColor,126);   
     stroke(myColor);    
     //convert degrees to radians for sin and cos         
     double dRadians = myPointDirection*(Math.PI/180);                 
