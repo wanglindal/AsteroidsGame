@@ -1,13 +1,19 @@
 SpaceShip ship;
+Asteroid [] blob;
 Stars [] star;//your variable declarations here
 public void setup() 
 {
   size(600,600);
    ship= new SpaceShip();
+   blob =new Asteroid[50];
    star= new Stars[400];
    for(int i=0; i<star.length;i++)
    {
     star[i] =new Stars(); 
+  }
+  for(int i=0; i<blob.length;i++)
+   {
+    blob[i] =new Asteroid();  
   }
 }
 public void draw() 
@@ -15,10 +21,17 @@ public void draw()
   background(0);
   ship.show();
   ship.move(); 
+ 
   for(int i=0; i<star.length;i++)
    {
     star[i].show();
+    
   } 
+  for (int i=0; i<blob.length; i++)
+  {
+    blob[i].show();
+    blob[i].move();
+  }
 }
 public void keyPressed()
 {
@@ -95,25 +108,64 @@ class SpaceShip extends Floater
 }
 class Asteroid extends Floater
 {
-  private double speedR;
+  private int rotateA;
   public Asteroid()
   {
-    speedR = (Math.random()*10)-5;
-    corners=3;
-    xCorners= new int[corners];
-    yCorners= new int[corners];
-    xCorners[0]= -8;
-    yCorners[0]=-8;
-    xCorners[1]= 16;
-    yCorners[1]=0;
-    xCorners[2]= -8;
-    yCorners[2]=8;
-    myColor=223;
-    myCenterX=300;
-    myCenterY=300;
-    myDirectionX=0;
-    myDirectionY=0;
+    if(Math.random() <.5)
+    {
+      rotateA= -1;
+    }
+    else 
+    {
+      rotateA=1;
+    }
+    corners =8;
+    xCorners=new int [corners];
+    yCorners=new int[corners];
+    xCorners[0]=8;
+    yCorners[0]=17;
+     xCorners[1]=6;
+    yCorners[1]=18;
+     xCorners[2]=11;
+    yCorners[2]=10;
+     xCorners[3]=14;
+    yCorners[3]=1;
+     xCorners[4]=8;
+    yCorners[4]=-9;
+     xCorners[5]=-2;
+    yCorners[5]=-9;
+     xCorners[6]=-11;
+    yCorners[6]=-4;
+    xCorners[7]=-15;
+    yCorners[7]=8;
+    myColor=125;
+    myCenterX=Math.random()*600;
+    myCenterY=Math.random()*600;
+    myDirectionX=(Math.random()*6)-3;
+    myDirectionY=(Math.random()*6)-3;
     myPointDirection=270;
+  }
+  public void move()
+  {
+    rotate(rotateA);
+    super.move();
+    
+  }
+  public void show()
+  {
+    fill(217,myColor,245);
+    double dRadians = myPointDirection*(Math.PI/180);                 
+    int xRotatedTranslated, yRotatedTranslated;    
+    beginShape();         
+    for(int nI = 0; nI < corners; nI++)    
+    {     
+      //rotate and translate the coordinates of the floater using current direction 
+      xRotatedTranslated = (int)((xCorners[nI]* Math.cos(dRadians)) - (yCorners[nI] * Math.sin(dRadians))+myCenterX);     
+      yRotatedTranslated = (int)((xCorners[nI]* Math.sin(dRadians)) + (yCorners[nI] * Math.cos(dRadians))+myCenterY);      
+      vertex(xRotatedTranslated,yRotatedTranslated);    
+    }   
+    endShape(CLOSE); 
+    
   }
    public void setX(int x) {myCenterX = x;}  
    public int getX(){return (int)myCenterX;}   
@@ -125,10 +177,7 @@ class Asteroid extends Floater
    public double getDirectionY() {return myDirectionY;}   
    public void setPointDirection(int degrees) {myPointDirection=degrees;} 
    public double getPointDirection(){return myPointDirection;}
-   public void move()
-   {
 
-   }
 }
 abstract class Floater //Do NOT modify the Floater class! Make changes in the SpaceShip class 
 {   
