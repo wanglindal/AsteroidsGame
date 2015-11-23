@@ -5,7 +5,7 @@ public void setup()
 {
   size(600,600);
    ship= new SpaceShip();
-   blob =new Asteroid[50];
+   blob =new Asteroid[20];
    star= new Stars[400];
    for(int i=0; i<star.length;i++)
    {
@@ -88,7 +88,7 @@ class SpaceShip extends Floater
     yCorners[1]=0;
     xCorners[2]= -8;
     yCorners[2]=8;
-    myColor=223;
+    myColor=181;
     myCenterX=300;
     myCenterY=300;
     myDirectionX=0;
@@ -119,26 +119,28 @@ class Asteroid extends Floater
     {
       rotateA=1;
     }
-    corners =8;
+    corners =9;
     xCorners=new int [corners];
     yCorners=new int[corners];
-    xCorners[0]=8;
-    yCorners[0]=17;
-     xCorners[1]=6;
-    yCorners[1]=18;
-     xCorners[2]=11;
-    yCorners[2]=10;
-     xCorners[3]=14;
-    yCorners[3]=1;
-     xCorners[4]=8;
-    yCorners[4]=-9;
-     xCorners[5]=-2;
-    yCorners[5]=-9;
-     xCorners[6]=-11;
+    xCorners[0]=0;
+    yCorners[0]=-20;
+     xCorners[1]=13;
+    yCorners[1]=-13;
+     xCorners[2]=12;
+    yCorners[2]=0;
+     xCorners[3]=15;
+    yCorners[3]=8;
+     xCorners[4]=0;
+    yCorners[4]=17;
+     xCorners[5]=-20;
+    yCorners[5]=10;
+     xCorners[6]=-20;
     yCorners[6]=-4;
-    xCorners[7]=-15;
-    yCorners[7]=8;
-    myColor=125;
+    xCorners[7]=-16;
+    yCorners[7]=-12;
+    xCorners[8]=-10;
+    yCorners[8]=-18;
+    myColor=176;
     myCenterX=Math.random()*600;
     myCenterY=Math.random()*600;
     myDirectionX=(Math.random()*6)-3;
@@ -153,7 +155,8 @@ class Asteroid extends Floater
   }
   public void show()
   {
-    fill(217,myColor,245);
+    noStroke();
+    fill(77,myColor,225);
     double dRadians = myPointDirection*(Math.PI/180);                 
     int xRotatedTranslated, yRotatedTranslated;    
     beginShape();         
@@ -239,7 +242,7 @@ abstract class Floater //Do NOT modify the Floater class! Make changes in the Sp
   }   
   public void show ()  //Draws the floater at the current position  
   {             
-    fill(77,myColor,126);   
+    fill(253,myColor,110);   
     stroke(myColor);    
     //convert degrees to radians for sin and cos         
     double dRadians = myPointDirection*(Math.PI/180);                 
