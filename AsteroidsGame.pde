@@ -1,12 +1,14 @@
 SpaceShip ship;
 ArrayList <Asteroid> blob;
-Stars [] star;//your variable declarations here
+Stars [] star;
+Bullet [] shoot;//your variable declarations here
 public void setup() 
 {
   size(600,600);
    ship= new SpaceShip();
    blob =new ArrayList <Asteroid>();
    star= new Stars[400];
+   shoot = new Bullet[10];
    for(int i=0; i<star.length;i++)
    {
     star[i] =new Stars(); 
@@ -14,6 +16,10 @@ public void setup()
   for(int i=0; i<30;i++)
    {
     blob.add(new Asteroid()) ;
+  }
+  for (int i=0; i<shoot.length;i++)
+  {
+    shoot[i]= new Bullet();
   }
 }
 public void draw() 
@@ -75,7 +81,13 @@ class Stars
     fill(255);
     ellipse(x,y,1,1);
   }
-
+class Bullet extends Floater
+{
+  Bullet (SpaceShip theShip)
+  {
+    
+  }
+}
 }
 class SpaceShip extends Floater  
 {   
