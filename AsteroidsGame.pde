@@ -4,7 +4,7 @@ Stars [] star;
 Bullet [] shoot;//your variable declarations here
 public void setup() 
 {
-  size(600,600);
+  //size(600,600,P2D);
    ship= new SpaceShip();
    blob =new ArrayList <Asteroid>();
    star= new Stars[400];
@@ -19,7 +19,7 @@ public void setup()
   }
   for (int i=0; i<shoot.length;i++)
   {
-    shoot[i]= new Bullet();
+    shoot[i]= new Bullet(ship);
   }
 }
 public void draw() 
@@ -27,10 +27,15 @@ public void draw()
   background(0);
   ship.show();
   ship.move(); 
- 
+  
   for(int i=0; i<star.length;i++)
    {
     star[i].show();
+    
+  } 
+  for(int i=0; i<shoot.length;i++)
+   {
+    shoot[i].show();
     
   } 
   for (int i=0; i<blob.size(); i++)
@@ -40,6 +45,8 @@ public void draw()
     if(dist(ship.getX(),ship.getY(),blob.get(i).getX(),blob.get(i).getY())<20)
         {blob.remove(i);}
   }
+
+
 }
 public void keyPressed()
 {
@@ -81,14 +88,35 @@ class Stars
     fill(255);
     ellipse(x,y,1,1);
   }
+}
 class Bullet extends Floater
 {
-  Bullet (SpaceShip theShip)
+  public Bullet (SpaceShip theShip)
   {
-    
+      myCenterX=300;
+    myCenterY=300;
+    myPointDirection=ship.getPointDirection();
+    double dRadians =myPointDirection*(Math.PI/180);
+    myDirectionX=5 * Math.cos(dRadians) +ship.getDirectionX();
+    myDirectionY=5 * Math.sin(dRadians) +ship.getDirectionX();
+  }
+  public void setX(int x) {myCenterX = x;}  
+   public int getX(){return (int)myCenterX;}   
+   public void setY(int y) {myCenterY=y;}  
+   public int getY() {return (int)myCenterY;}   
+   public void setDirectionX(double x){myDirectionX=x;}   
+  public double getDirectionX() {return myDirectionX;}   
+   public void setDirectionY(double y){myDirectionY=y;} 
+   public double getDirectionY() {return myDirectionY;}   
+   public void setPointDirection(int degrees) {myPointDirection=degrees;} 
+   public double getPointDirection(){return myPointDirection;}
+
+  public void show()
+  {
+    ellipse((float)myCenterX,(float)myCenterY,10,10);
   }
 }
-}
+
 class SpaceShip extends Floater  
 {   
   public SpaceShip()
