@@ -1,14 +1,14 @@
 SpaceShip ship;
 ArrayList <Asteroid> blob;
 Stars [] star;
-Bullet [] shoot;//your variable declarations here
+ArrayList <Bullet> bullets;//your variable declarations here
 public void setup() 
 {
-  //size(600,600,P2D);
+  size(600,600);
    ship= new SpaceShip();
    blob =new ArrayList <Asteroid>();
    star= new Stars[400];
-   shoot = new Bullet[10];
+   bullets = new ArrayList <Bullet>();
    for(int i=0; i<star.length;i++)
    {
     star[i] =new Stars(); 
@@ -17,10 +17,10 @@ public void setup()
    {
     blob.add(new Asteroid()) ;
   }
-  for (int i=0; i<shoot.length;i++)
+  /*for( int i=0; i<10 ; i++)
   {
-    shoot[i]= new Bullet(ship);
-  }
+    bullets.add(new Bullet(ship));
+  }*/
 }
 public void draw() 
 {
@@ -32,12 +32,7 @@ public void draw()
    {
     star[i].show();
     
-  } 
-  for(int i=0; i<shoot.length;i++)
-   {
-    shoot[i].show();
-    
-  } 
+  }
   for (int i=0; i<blob.size(); i++)
   {
     blob.get(i).show();
@@ -45,7 +40,13 @@ public void draw()
     if(dist(ship.getX(),ship.getY(),blob.get(i).getX(),blob.get(i).getY())<20)
         {blob.remove(i);}
   }
-
+ for(int i=0; i<bullets.size();i++)
+   {
+    bullets.get(i).show();
+    bullets.get(i).move();
+  
+  } 
+  
 
 }
 public void keyPressed()
@@ -74,7 +75,12 @@ public void keyPressed()
       ship.setDirectionY(0);
       ship.setPointDirection((int)(Math.random()*360));
     }
-}
+    if (keyCode == CONTROL)
+    {
+
+       bullets.add(new Bullet(ship));
+      }
+  }
 class Stars
 {
   private int x,y;
@@ -93,8 +99,8 @@ class Bullet extends Floater
 {
   public Bullet (SpaceShip theShip)
   {
-      myCenterX=300;
-    myCenterY=300;
+      myCenterX=ship.getX();
+    myCenterY=ship.getY();
     myPointDirection=ship.getPointDirection();
     double dRadians =myPointDirection*(Math.PI/180);
     myDirectionX=5 * Math.cos(dRadians) +ship.getDirectionX();
@@ -113,6 +119,7 @@ class Bullet extends Floater
 
   public void show()
   {
+    fill(255,130,72);
     ellipse((float)myCenterX,(float)myCenterY,10,10);
   }
 }
