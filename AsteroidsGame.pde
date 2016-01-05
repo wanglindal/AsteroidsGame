@@ -39,12 +39,25 @@ public void draw()
     blob.get(i).move();
     if(dist(ship.getX(),ship.getY(),blob.get(i).getX(),blob.get(i).getY())<20)
         {blob.remove(i);}
+    for(int k=0; k<bullets.size();k++)
+     {
+      if (dist(blob.get(i).getX(),blob.get(i).getY(), bullets.get(k).getX(), bullets.get(k).get(Y))<20)
+        {blob.remove(i);
+          bullets.remove(k);}
+     }
   }
  for(int i=0; i<bullets.size();i++)
    {
     bullets.get(i).show();
     bullets.get(i).move();
-  
+   if(bullets.get(i).getX() ==0 || bullets.get(i).getX() == 600)
+   {
+      bullets.remove(i);
+   }
+   else if (bullets.get(i).getY() ==0 || bullets.get(i).getY() ==600 )
+   {
+      bullets.remove(i);
+   }
   } 
   
 
@@ -122,6 +135,7 @@ class Bullet extends Floater
     fill(255,130,72);
     ellipse((float)myCenterX,(float)myCenterY,10,10);
   }
+ 
 }
 
 class SpaceShip extends Floater  
