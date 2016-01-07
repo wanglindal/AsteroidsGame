@@ -38,12 +38,17 @@ public void draw()
     blob.get(i).show();
     blob.get(i).move();
     if(dist(ship.getX(),ship.getY(),blob.get(i).getX(),blob.get(i).getY())<20)
-        {blob.remove(i);}
+        {blob.remove(i);
+         }
     for(int k=0; k<bullets.size();k++)
      {
-      if (dist(blob.get(i).getX(),blob.get(i).getY(), bullets.get(k).getX(), bullets.get(k).get(Y))<20)
-        {blob.remove(i);
-          bullets.remove(k);}
+      if (dist(blob.get(i).getX(),blob.get(i).getY(), bullets.get(k).getX(), bullets.get(k).getY())<20)
+        {
+          blob.remove(i);
+          bullets.remove(k);
+          break;
+          
+        }
      }
   }
  for(int i=0; i<bullets.size();i++)
